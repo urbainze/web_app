@@ -1,0 +1,46 @@
+[
+    {
+        "user_id": "urbainzeus@gmail.com",
+        "password": "19c9fa7cdf61a0bc9357a49a022c3d43",
+        "role": "user",
+        "creation_date": "2024-05-06T11:04:38.175696",
+        "start": null,
+        "expire": null,
+        "is_validated": true,
+        "imports": [],
+        "chat_history": []
+    },
+    {
+        "user_id": "urbain@gmail.com",
+        "password": "243d13bfe248f65fc52230e32207803c",
+        "role": "user",
+        "creation_date": "2024-05-06T11:07:31.189027",
+        "start": null,
+        "expire": null,
+        "is_validated": true,
+        "imports": [],
+        "chat_history": []
+    },
+    {
+        "user_id": "gerard@gmail.com",
+        "password": "4640d57b6b85ca74232bab1f2f1e7887",
+        "role": "user",
+        "creation_date": "2024-05-06T11:47:17.514726",
+        "start": null,
+        "expire": null,
+        "is_validated": true,
+        "imports": [],
+        "chat_history": []
+    },
+    {
+        "user_id": "marc-aurel@gmail.com",
+        "password": "b61ecbe6fc0b6c4e54eab243b9a1f396",
+        "role": "user",
+        "creation_date": "2024-07-02T15:59:17.666482",
+        "start": null,
+        "expire": null,
+        "is_validated": true,
+        "imports": [],
+        "chat_history": []
+    }
+]

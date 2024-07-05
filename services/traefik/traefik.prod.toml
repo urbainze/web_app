@@ -1,0 +1,35 @@
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+    [entryPoints.http.http.redirections.entryPoint]
+      to = "https"
+      scheme = "https"
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.tls]
+
+[api]
+  dashboard = true
+
+[log]
+  level = "DEBUG"
+
+[accessLog]
+
+[providers]
+  [providers.docker]
+    endpoint = "unix:///var/run/docker.sock"
+    exposedByDefault = false
+    watch = true
+
+[certificatesResolvers.letsencrypt]
+  [certificatesResolvers.letsencrypt.acme]
+    email = "urbain-anastase.ze@csgroup.eu"
+    storage = "/etc/traefik/acme.json"
+    [certificatesResolvers.letsencrypt.acme.dnsChallenge]
+      provider = "route53"
+      delayBeforeCheck = 0
+
+[[tls.certificates]]
+  certFile = "/certificates/traefik.crt"
+  keyFile = "/certificates/traefik.key"

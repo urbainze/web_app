@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  flask:
+    build:
+      context: ./services/web
+      dockerfile: flask_dockerfile
+    expose:
+      - 8057
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flask.rule=Host(`doc2value-llm.cloud-csgroup.eu`)"
+      - "traefik.http.routers.flask.tls=true"
+      - "traefik.http.routers.flask.tls.certresolver=letsencrypt"
+    networks:
+      - my-network
+
+  traefik:
+    image: traefik:v2.5
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik-public-certificates:/certificates"
+      - "./services/traefik/traefik.dev.toml:/traefik.toml"
+      - "./acme.json:/etc/traefik/acme.json"
+    env_file:
+      - .env
+    command:
+      - "--configFile=/traefik.toml"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monitoring.rule=Host(`dashboard.doc2value-llm.cloud-csgroup.eu`)"
+      - "traefik.http.routers.monitoring.tls=true"
+      - "traefik.http.routers.monitoring.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.monitoring.service=api@internal"
+      - "traefik.http.routers.monitoring.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=testuser:$$apr1$$jIKW.bdS$$eKXe4Lxjgy/rH65wP1iQe1"
+    networks:
+      - my-network
+
+volumes:
+  traefik-public-certificates:
+
+networks:
+  my-network:
+    driver: bridge
